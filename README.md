@@ -8,6 +8,6 @@ More features are to come. Next on the docket is a simple chat log, a feature I'
 
 All the love,
 Warren
+twitter.com/warrenkener
 
-P.S. - twitter.com/warrenkener (NSFW but not X-Rated)
-send any feedback, suggestions, or inquiries to warrenkener@gmail.com
+P.S. - send any feedback, suggestions, or inquiries to warrenkener@gmail.com
