@@ -1,0 +1,12 @@
+{
+  "name": "Chaturbate Model Assistant",
+  "description": "Assists Chaturbate models in managing their chatroom",
+  "version": "1.0",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["https://*.chaturbate.com/b/*"],
+      "js": ["cbcontent.js"]
+    }
+  ]
+}
