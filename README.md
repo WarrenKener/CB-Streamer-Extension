@@ -1,6 +1,6 @@
 # Chaturbate-Model-Extension
 
-This rowser extension is for Chrome and is installed in the same way that the lovense extension is, for example. More explicit installation instructions are forthcoming.
+This browser extension is for Chrome and is installed in the same way that the lovense extension is, for example. More explicit installation instructions are forthcoming.
 
 atm, this extension will show any Private Messages you receive as a broadcaster above the Chat area, & without the broadcaster needing to click the PM tab and then User to see the PM. No mouse use is required anymore, simply read the PMs you receive as you receive them near wher you are used to seeing chat messages already, without lifting a finger or touching your computer or mouse in any way.
 
