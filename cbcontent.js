@@ -4,18 +4,19 @@ function myMain (evt) {
     var jsInitChecktimer = setInterval (checkForJS_Finish, 500);
 
     function checkForJS_Finish () {
-        if (document.querySelector(".message-list")) { //typeof SOME_GLOBAL_VAR != "null" ||  
+        if (document.querySelector(".message-list")) {
             clearInterval(jsInitChecktimer);
 
             if (!document.querySelector("ul#room_list")) {
-                var numOfChatTabs = 0 // to begin
-                var newChatSessionElems = []
-
+                // front end
                 var span = document.createElement("span")
                 span.setAttribute('style', 'float: right')
                 var refDiv = document.querySelector('div.BroadcastRoot > div:nth-of-type(3) > div > div:nth-of-type(2) > div')
                 refDiv.appendChild(span)
-
+                
+                // back end
+                var numOfChatTabs = 0 // to begin
+                var newChatSessionElems = []
                 var newMsgObsArr = []
 
                 function makeChatTabObs(indexOfChatTab) {
