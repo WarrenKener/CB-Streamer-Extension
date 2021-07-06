@@ -10,8 +10,8 @@ function myMain (evt) {
             if (!document.querySelector("ul#room_list")) {
                 // front end
                 var span = document.createElement("span")
-                span.setAttribute('style', 'float: right')
                 var refDiv = document.querySelector('div.BroadcastRoot > div:nth-of-type(3) > div > div:nth-of-type(2) > div')
+                refDiv.setAttribute('style', 'position: relative;')
                 refDiv.appendChild(span)
                 
                 // back end
@@ -24,6 +24,12 @@ function myMain (evt) {
                         if (newChatSessionElems[indexOfChatTab].parentElement.getAttribute('style').includes("display: none")) {
                             var chatUser = newChatSessionElems[indexOfChatTab].querySelector('div.msg-text:last-of-type div.purecolor').innerText
                             var chatText = newChatSessionElems[indexOfChatTab].querySelector('div.msg-text:last-of-type span.msg-text span').innerText
+                            var textSize = newChatSessionElems[indexOfChatTab].getAttribute('style').slice(newChatSessionElems[indexOfChatTab].getAttribute('style').indexOf('font-size') + 11)
+                            if (indexOfChatTab == 0) {
+                                span.setAttribute('style', 'position: absolute; right: 0; color: black; background-color: yellow; float: right; font-size: ' + textSize)
+                            } else {
+                                span.setAttribute('style', 'position: absolute; right: 0; color: white; background-color: orange; float: right; font-size: ' + textSize)
+                            }
                             span.innerText = chatUser + ": " + chatText
                         }
                     })
