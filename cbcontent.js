@@ -25,12 +25,14 @@ function myMain (evt) {
                             var chatUser = newChatSessionElems[indexOfChatTab].querySelector('div.msg-text:last-of-type div.purecolor').innerText
                             var chatText = newChatSessionElems[indexOfChatTab].querySelector('div.msg-text:last-of-type span.msg-text span').innerText
                             var textSize = newChatSessionElems[indexOfChatTab].getAttribute('style').slice(newChatSessionElems[indexOfChatTab].getAttribute('style').indexOf('font-size') + 11)
-                            if (indexOfChatTab == 0) {
-                                span.setAttribute('style', 'position: absolute; right: 0; color: black; background-color: yellow; float: right; font-size: ' + textSize)
-                            } else {
-                                span.setAttribute('style', 'position: absolute; right: 0; color: white; background-color: orange; float: right; font-size: ' + textSize)
+                            if (newChatSessionElems[indexOfChatTab].querySelector('div.msg-text:last-of-type div.purecolor').classList.contains('broadcaster') === false) {
+                                if (indexOfChatTab == 0) {
+                                    span.setAttribute('style', 'position: absolute; right: 0; color: black; background-color: yellow; float: right; font-size: ' + textSize)
+                                } else {
+                                    span.setAttribute('style', 'position: absolute; right: 0; color: white; background-color: orange; float: right; font-size: ' + textSize)
+                                }
+                                span.innerText = chatUser + ": " + chatText
                             }
-                            span.innerText = chatUser + ": " + chatText
                         }
                     })
                 }
@@ -56,4 +58,4 @@ function myMain (evt) {
             }
         }
     }
-} 
+}
