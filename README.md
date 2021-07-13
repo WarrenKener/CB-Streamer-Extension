@@ -1,4 +1,4 @@
-# Chaturbate Model Extension for Chrome
+# CB Streamer Extension for Chrome
 
 This browser extension is for Chrome and is installed by putting the all the files in this repository into a folder on your hard drive, then going to Chrome options > More tools > Extensions. With developer mode enabled, click the button "load unpacked" and select the aforementioned folder.
 
