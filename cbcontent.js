@@ -9,29 +9,44 @@ function myMain (evt) {
 
             if (!document.querySelector("ul#room_list")) {
                 // front end
-                var span = document.createElement("span")
-                var refDiv = document.querySelector('div.BroadcastRoot > div:nth-of-type(3) > div > div:nth-of-type(2) > div')
-                refDiv.setAttribute('style', 'position: relative;')
-                refDiv.appendChild(span)
+                //var span = document.createElement("span")
+                //var refDiv = document.querySelector('div.BroadcastRoot > div:nth-of-type(3) > div > div:nth-of-type(2) > div')
+                //refDiv.setAttribute('style', 'position: relative;')
+                //refDiv.appendChild(span)
                 
                 // back end
                 var numOfChatTabs = 0 // to begin
-                var newChatSessionElems = []
-                var newMsgObsArr = []
+                var chatSessions = []
+                var msgObservers = []
 
                 function makeChatTabObs(indexOfChatTab) {
-                    newMsgObsArr[newMsgObsArr.length] = new MutationObserver(function() {
-                        if (newChatSessionElems[indexOfChatTab].parentElement.getAttribute('style').includes("display: none")) {
-                            var chatUser = newChatSessionElems[indexOfChatTab].querySelector('div.msg-text:last-of-type div.purecolor').innerText
-                            var chatText = newChatSessionElems[indexOfChatTab].querySelector('div.msg-text:last-of-type span.msg-text span').innerText
-                            var textSize = newChatSessionElems[indexOfChatTab].getAttribute('style').slice(newChatSessionElems[indexOfChatTab].getAttribute('style').indexOf('font-size') + 11)
-                            if (newChatSessionElems[indexOfChatTab].querySelector('div.msg-text:last-of-type div.purecolor').classList.contains('broadcaster') === false) {
-                                if (indexOfChatTab == 0) {
-                                    span.setAttribute('style', 'position: absolute; right: 0; color: black; background-color: yellow; float: right; font-size: ' + textSize)
-                                } else {
-                                    span.setAttribute('style', 'position: absolute; right: 0; color: white; background-color: orange; float: right; font-size: ' + textSize)
-                                }
+                    msgObservers[msgObservers.length] = new MutationObserver(function() {
+                        //if (chatSessions[indexOfChatTab].parentElement.getAttribute('style').includes("display: none")) {
+                        var chatUser = chatSessions[indexOfChatTab].querySelector('div.msg-text:last-of-type div.purecolor').innerText
+                        var chatText = chatSessions[indexOfChatTab].querySelector('div.msg-text:last-of-type span.msg-text span').innerText
+                        var textSize = chatSessions[indexOfChatTab].getAttribute('style').slice(chatSessions[indexOfChatTab].getAttribute('style').indexOf('font-size') + 11)
+                        
+                        if (chatSessions[indexOfChatTab].querySelector('div.msg-text:last-of-type div.purecolor').classList.contains('broadcaster') === false) {
+                            if (indexOfChatTab === 0) {
+                                //tbc
+                            } else {
+                                var span = document.createElement("span")
+                                span.setAttribute('style', 'color: black; background-color: yellow; font-size: ' + textSize)
+
+                                var chatMsgList = chatSessions[0].querySelector('div.message-list')
+                                var newChatDivParent = chatMsgList.querySelector('div.msg-text').cloneNode(false)
+                                var newChatDivChild = chatMsgList.querySelector('div.msg-text > div').cloneNode(false)
+                                var newOuterSpan = document.createElement('span')
+                                newOuterSpan.setAttribute('class', 'emoticonImage msg-text split-mode')
+                                
+                                chatMsgList.appendChild(newChatDivParent)
+                                chatMsgList.querySelector('div.msg-text:last-of-type').appendChild(newChatDivChild)
+                                chatMsgList.querySelector('div.msg-text:last-of-type > div').appendChild(newOuterSpan)
+                                chatMsgList.querySelector('div.msg-text:last-of-type > div > span').appendChild(span)
                                 span.innerText = chatUser + ": " + chatText
+
+                                var divForScroll = commboxElem.querySelector('div > div > div.msg-list-wrapper-split')
+                                divForScroll.scrollTop = divForScroll.scrollHeight
                             }
                         }
                     })
@@ -42,14 +57,14 @@ function myMain (evt) {
 
                     if (numOfChatTabs != ChatTabElems.length) {
                         for (element of ChatTabElems) {
-                            if (element != newChatSessionElems[Array.prototype.indexOf.call(ChatTabElems, element)]) {
-                                newChatSessionElems.push(element)
+                            if (element != chatSessions[Array.prototype.indexOf.call(ChatTabElems, element)]) {
+                                chatSessions.push(element)
                             }
                         }
-                        makeChatTabObs(newChatSessionElems.length - 1)
-                        newMsgObsArr[newMsgObsArr.length - 1].observe(newChatSessionElems[newChatSessionElems.length - 1], {attributes: true, subtree: true, childList: true})
+                        makeChatTabObs(chatSessions.length - 1)
+                        msgObservers[msgObservers.length - 1].observe(chatSessions[chatSessions.length - 1], {attributes: true, subtree: true, childList: true})
 
-                        numOfChatTabs = newChatSessionElems.length
+                        numOfChatTabs = chatSessions.length
                     }
                 })
             
